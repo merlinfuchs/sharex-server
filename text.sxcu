@@ -1,0 +1,13 @@
+﻿{
+  "Version": "12.4.1",
+  "Name": "text",
+  "DestinationType": "ImageUploader, FileUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "http://localhost/t",
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "filename": "$filename$",
+    "input": "$input$"
+  },
+  "URL": "http://localhost/t/$response$"
+}

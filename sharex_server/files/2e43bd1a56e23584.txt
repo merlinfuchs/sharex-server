@@ -1,0 +1,8 @@
+@router.get("/s/{id}")
+async def _urls(req):
+    id = req.match_info['id'].lower()
+    url = await req.app.db.urls.find_one({"_id": id})
+    if url is None:
+        raise web.HTTPNotFound()
+
+    raise web.HTTPFound(url["url"])
