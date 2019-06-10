@@ -14,6 +14,6 @@ A full featured sharex server for files, images, text and urls
 
 ## Configure ShareX
 
-- Input the `.sxcu` files in the `Custom uploader setting` of ShareX.
+- Inport the `.sxcu` files in the `Custom uploader setting` of ShareX.
 - Change the hostname and the scheme in the inported settings.
 - Select the `Custom x uploader` for each Destination.
