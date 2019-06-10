@@ -5,7 +5,8 @@ A full featured sharex server for files, images, text and urls
 
 ## Dependencies
 
-- [Python 3.6 or higher](https://www.python.org/)    
+- [Python 3.6 or higher](https://www.python.org/)
+- [MongoDB Serve](https://www.mongodb.com/what-is-mongodb)
 - Install all python packages with `pip install -U -r requirements.txt`
 
 ## Start the Website
