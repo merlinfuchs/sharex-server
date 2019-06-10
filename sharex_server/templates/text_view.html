@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Text Viewer</title>
+    <title>{{filename}}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/a11y-dark.min.css">
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+
+
+    <meta property="og:title" content="{{ filename }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="{{text}}"/>
 </head>
 <body class="bg-dark">
 <div class="container my-0" style="border-left: black 2px solid; border-right: black 2px solid; min-height: 100vh;">

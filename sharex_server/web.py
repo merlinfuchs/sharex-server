@@ -3,7 +3,7 @@ import aiohttp_jinja2
 import jinja2
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from extensions import urls, files, text
+from extensions import urls, files, text, index
 
 
 class App(web.Application):
@@ -23,6 +23,7 @@ class App(web.Application):
         self.add_routes(urls.router)
         self.add_routes(files.router)
         self.add_routes(text.router)
+        self.add_routes(index.router)
 
     async def prepare(self, app):
         app.session = ClientSession()
@@ -33,4 +34,4 @@ class App(web.Application):
 
 
 app = App()
-web.run_app(app, port=80)
+web.run_app(app, port=8081)

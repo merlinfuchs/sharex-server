@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Files, Text and Url Shortening</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+<body class="bg-dark">
+<div class="container my-5 py-5">
+    <h1 class="display-1 text-light mb-4" id="title"></h1>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 my-4">
+            <select class="form-control" id="upload-select">
+                <option value="urls" selected>Url Shortener</option>
+                <option value="text">Text</option>
+            </select>
+        </div>
+    </div>
+    <div id="urls">
+        <form action="/s" method="post">
+            <div class="form-row">
+                <div class="col-10">
+                    <input type="text" id="url-input" class="form-control" placeholder="Url">
+                </div>
+                <div class="col-2">
+                    <button type="button" id="url-btn" class="btn btn-primary">Shorten</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="text" style="display: none;">
+        <form action="/t" method="post">
+            <div class="form-row">
+                <div class="col-10">
+                    <textarea id="text-input" style="width: 100%" rows="5" placeholder="Hello World"></textarea>
+                </div>
+                <div class="col-2">
+                    <button type="button" id="text-btn" class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="result-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <a href="" id="result-url"></a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function () {
+        $("#upload-select").click(function () {
+            if (this.value === "urls") {
+                $("#urls").css("display", "block");
+                $("#text").css("display", "none")
+            } else if (this.value === "text") {
+                $("#urls").css("display", "none");
+                $("#text").css("display", "block")
+            }
+        });
+
+        $("#text-btn").click(function () {
+            $.post("/t", {"input": $("#text-input").val(), "filename": "web-upload.txt"}).done(function (resp) {
+                $("#result-url").html(`${window.location.hostname}/t/${resp}`);
+                $("#result-url").attr("href", `/t/${resp}`);
+                $("#result-modal").modal("show");
+            });
+        });
+
+        $("#url-btn").click(function () {
+            $.post("/s", {"input": $("#url-input").val()}).done(function (resp) {
+                $("#result-url").html(`${window.location.hostname}/s/${resp}`);
+                $("#result-url").attr("href", `/s/${resp}`);
+                $("#result-modal").modal("show");
+            });
+        });
+
+        $("#title").html(window.location.hostname);
+    });
+</script>
+</body>
+</html>
